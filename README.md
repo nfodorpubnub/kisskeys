@@ -1,7 +1,7 @@
 kisskeys
 ========
 
-Command line tool to retrieve PubNub keys with login and password.
+Command line tool to retrieve PubNub keys with login and password and save publish and subscribe keys in a json file for consumption by apps using PubNub SDK.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/kisskeys.svg)](https://npmjs.org/package/kisskeys)
@@ -16,40 +16,33 @@ Command line tool to retrieve PubNub keys with login and password.
 <!-- usage -->
 ```sh-session
 $ npm install -g kisskeys
-$ kisskeys COMMAND
+$ kisskeys -o ./pubnub-keys.json
+$ kisskeys --user "youremail" --password "yourpassword" -o ./pubnub-keys.json
 running command...
 $ kisskeys (-v|--version|version)
 kisskeys/0.0.1 darwin-x64 node-v12.14.0
 $ kisskeys --help [COMMAND]
 USAGE
-  $ kisskeys COMMAND
+  $ kisskeys --user "youremail" --password "yourpassword" -o ./pubnub-keys.json
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`kisskeys hello [FILE]`](#kisskeys-hello-file)
-* [`kisskeys help [COMMAND]`](#kisskeys-help-command)
+## `kisskeys enterkeys [COMMAND]`
 
-## `kisskeys hello [FILE]`
-
-describe the command here
+Enter PubNub keys to json key config file.
 
 ```
 USAGE
-  $ kisskeys hello [FILE]
+  $ kisskeys enterkeys
+
+ARGUMENTS
+  enterkeys  Enter PubNub keys to json key file
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ kisskeys hello
-  hello world from ./src/hello.ts!
+  --all  see all commands in CLI
 ```
-
-_See code: [src/commands/hello.ts](https://github.com/nfodorpubnub/kisskeys/blob/v0.0.1/src/commands/hello.ts)_
 
 ## `kisskeys help [COMMAND]`
 
@@ -66,5 +59,5 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/enterkeys.ts)_
 <!-- commandsstop -->
