@@ -141,18 +141,24 @@ export default class EnterKeys extends Command {
         })
        // this.log(`Results found: ${Object.keys(body2.body.result)}`)
         const resultsKeys = Object.keys(body2.body.result)
-
-        resultsKeys.forEach(element => {
-          // this.log(JSON.stringify(Object.keys(body2.body.result)[element]))
-          // f(typeof x === "object") {
-          //   x = JSON.stringify(x, null, 4);
-          // }
-          const tmp1 = body2.body.result[0].keys[0] // .getByIndex(0)
+        let counter: number = -1
+        
+        resultsKeys.forEach(result => {
+          counter++
+          this.log(`Key Set: ${counter}`)
+          //const AppsKeys = Object.keys(group.keys)
+          //this.log(`Key Set: ${AppsKeys}`)
+          // resultsKeys.forEach(App => {
+          const tmp1 = body2.body.result[counter].keys[0]
           this.log(`App ID: ${tmp1.app_id}`)
+          this.log(`App Name: ${body2.body.result[counter].name}`)
           this.log(`subscribe_key: ${tmp1.subscribe_key}`)
           this.log(`publish_key: ${tmp1.publish_key}`)
-        })  
-     
+          // })
+
+
+        })
+
       } catch (error) {
         this.log(error.response.body.error)
         return
