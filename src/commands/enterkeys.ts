@@ -142,22 +142,52 @@ export default class EnterKeys extends Command {
        // this.log(`Results found: ${Object.keys(body2.body.result)}`)
         const resultsKeys = Object.keys(body2.body.result)
         let counter: number = -1
-        
+       
+        let keySets: any = []
         resultsKeys.forEach(result => {
           counter++
           this.log(`Key Set: ${counter}`)
-          //const AppsKeys = Object.keys(group.keys)
-          //this.log(`Key Set: ${AppsKeys}`)
+          // const AppsKeys = Object.keys(group.keys)
+          // this.log(`Key Set: ${AppsKeys}`)
           // resultsKeys.forEach(App => {
           const tmp1 = body2.body.result[counter].keys[0]
           this.log(`App ID: ${tmp1.app_id}`)
           this.log(`App Name: ${body2.body.result[counter].name}`)
           this.log(`subscribe_key: ${tmp1.subscribe_key}`)
           this.log(`publish_key: ${tmp1.publish_key}`)
+
+          keySets.push({
+            publish_key: tmp1.publish_key,
+            subscribe_key: tmp1.subscribe_key,
+          })
           // })
 
 
         })
+        
+        if (counter === 0) {
+          // We assume one app so no menu
+
+          const keys = {
+            publish_key: keySets[0].publish_key,
+            subscribe_key: keySets[0].subscribe_key,
+            // access: ''
+          }
+
+          const data = JSON.stringify(keys)
+          fs.writeFileSync(flags.output ?? '.pubnub', data)
+        } else {
+          const keys = {
+            publish_key: keySets[0].publish_key,
+            subscribe_key: keySets[0].subscribe_key,
+            // access: ''
+          }
+
+          const data = JSON.stringify(keys)
+          const finalPath = flags.output ?? '.pubnub'
+          this.log(`Saving keys to file: ${finalPath}`)
+          fs.writeFileSync(finalPath ?? '.pubnub', data)
+        }
 
       } catch (error) {
         this.log(error.response.body.error)
